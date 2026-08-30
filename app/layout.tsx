@@ -16,8 +16,11 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-[#0A0A0A] text-white min-h-screen font-sans selection:bg-[#C9A84C] selection:text-[#0A0A0A]">
+    <html lang="fr" className={`${inter.variable} ${playfair.variable}`} style={{ backgroundImage: "url('/bg-market.png')", backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed", backgroundRepeat: "no-repeat" }}>
+      <body
+        className="min-h-screen font-sans text-gray-800 selection:text-gray-900 flex flex-col"
+        style={{ background: "transparent", minHeight: "100vh" }}
+      >
         {children}
       </body>
     </html>

@@ -25,12 +25,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     router.refresh();
   }
 
+  // Uses BB-07 light theme with Inter font globally in admin
   return (
-    <div className="min-h-screen bg-bb-black flex flex-col md:flex-row">
+    <div className="min-h-screen bg-admin-bg text-admin-text font-sans flex flex-col md:flex-row selection:bg-admin-primary-500 selection:text-white">
       {/* Sidebar Mobile (Bottom Nav) & Desktop */}
-      <nav className="fixed bottom-0 w-full md:relative md:w-64 bg-bb-gray border-t md:border-t-0 md:border-r border-bb-gray-mid z-50">
-        <div className="hidden md:flex p-6 border-b border-bb-gray-mid items-center justify-center">
-          <h1 className="font-display text-xl font-bold text-bb-gold">Black Bazaar</h1>
+      <nav className="fixed bottom-0 w-full md:relative md:w-64 bg-admin-surface border-t md:border-t-0 md:border-r border-admin-border z-50 shadow-sm md:shadow-none">
+        <div className="hidden md:flex p-6 border-b border-admin-border items-center justify-center">
+          <h1 className="text-xl font-bold text-admin-primary-500">Black Bazaar</h1>
         </div>
         
         <ul className="flex md:flex-col justify-around md:justify-start p-2 md:p-4 gap-2">
@@ -42,23 +43,23 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <li key={item.href} className="flex-1 md:flex-none">
                 <Link
                   href={item.href}
-                  className={`flex flex-col md:flex-row items-center gap-1 md:gap-3 p-3 rounded-lg transition-colors ${
+                  className={`flex flex-col md:flex-row items-center gap-1 md:gap-3 p-3 rounded-xl transition-colors ${
                     isActive 
-                      ? "bg-bb-gold/10 text-bb-gold font-medium" 
-                      : "text-bb-text-muted hover:text-white hover:bg-[#2A2A2A]"
+                      ? "bg-admin-primary-50 text-admin-primary-500 font-bold" 
+                      : "text-admin-text-muted hover:text-admin-text hover:bg-neutral-100"
                   }`}
                 >
-                  <Icon size={20} />
+                  <Icon size={20} className={isActive ? "text-admin-primary-500" : ""} />
                   <span className="text-xs md:text-sm">{item.label}</span>
                 </Link>
               </li>
             );
           })}
           
-          <li className="hidden md:block mt-auto pt-8">
+          <li className="hidden md:block mt-auto pt-8 border-t border-admin-border mt-4">
             <button
               onClick={handleLogout}
-              className="w-full flex items-center gap-3 p-3 text-bb-rare hover:bg-bb-rare-bg rounded-lg transition-colors text-sm"
+              className="w-full flex items-center gap-3 p-3 text-red-600 hover:bg-red-50 rounded-xl transition-colors text-sm font-medium"
             >
               <LogOut size={20} />
               Déconnexion
@@ -69,7 +70,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8 pb-24 md:pb-8 overflow-y-auto">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {children}
         </div>
       </main>

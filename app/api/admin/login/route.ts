@@ -6,6 +6,7 @@ import { getDb } from "@/lib/db";
 import { admins } from "@/lib/db/schema";
 import { verifyPassword, signToken, COOKIE_NAME } from "@/lib/auth";
 import { eq } from "drizzle-orm";
+import { forceSeedAdmin } from "@/lib/db/seed";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,9 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Force seed admin on first login attempt (MVP trick since wrangler d1 execute fails on Windows local)
+    await forceSeedAdmin();
 
     // Anti-bruteforce check
     const attempts = failedAttempts.get(email);

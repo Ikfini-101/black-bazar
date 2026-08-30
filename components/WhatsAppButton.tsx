@@ -1,41 +1,32 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
-import { WHATSAPP_NUMBER } from "@/lib/constants";
+import { useEffect, useState } from "react";
 
-export default function WhatsAppButton({ 
-  message = "Bonjour, j'aimerais avoir plus d'informations sur vos produits.",
-  showText = false
-}: { 
-  message?: string;
-  showText?: boolean;
-}) {
-  const url = `https://wa.me/${WHATSAPP_NUMBER.replace(/\+/g, "")}?text=${encodeURIComponent(message)}`;
+export default function WhatsAppButton() {
+  const [isVisible, setIsVisible] = useState(false);
 
-  if (showText) {
-    return (
-      <a 
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-full bg-transparent border-2 border-[#C9A84C] text-[#C9A84C] font-bold uppercase tracking-wide py-3.5 rounded-lg flex justify-center items-center gap-2 hover:bg-[#C9A84C] hover:text-[#0A0A0A] transition-colors"
-      >
-        <MessageCircle size={20} />
-        Je suis intéressé(e)
-      </a>
-    );
-  }
+  // Pour éviter des problèmes d'hydratation, on ne l'affiche qu'côté client
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
-  // Floating button
+  if (!isVisible) return null;
+
   return (
     <a
-      href={url}
+      href="https://wa.me/33700000000"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform flex items-center justify-center"
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
       aria-label="Contactez-nous sur WhatsApp"
     >
       <MessageCircle size={28} />
+      
+      {/* Tooltip au hover */}
+      <span className="absolute right-full mr-4 glass-sm text-gray-800 text-sm font-bold px-4 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md border border-white/60">
+        Besoin d&apos;aide ?
+      </span>
     </a>
   );
 }

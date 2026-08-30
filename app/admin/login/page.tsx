@@ -38,25 +38,26 @@ export default function AdminLogin() {
     }
   }
 
+  // Uses BB-07 light theme values
   return (
-    <div className="min-h-screen bg-bb-black flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md bg-bb-gray border border-bb-gray-mid rounded-xl p-8 shadow-2xl">
+    <div className="min-h-screen bg-admin-bg flex flex-col items-center justify-center p-4 font-sans text-admin-text">
+      <div className="w-full max-w-md bg-admin-surface border border-admin-border rounded-2xl p-8 shadow-sm">
         <div className="text-center mb-8">
-          <h1 className="font-display text-3xl font-bold text-bb-gold mb-2">Black Bazaar</h1>
-          <p className="text-bb-text-muted">Espace Administration</p>
+          <h1 className="text-3xl font-bold text-admin-primary-500 mb-2">Black Bazaar</h1>
+          <p className="text-admin-text-muted">Espace Administration</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm text-center">
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
             {error}
           </div>
         )}
 
         <form onSubmit={onSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-bb-white">Email</label>
+            <label className="text-sm font-medium text-admin-text">Email</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-bb-text-muted">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-admin-text-muted">
                 <Mail size={18} />
               </div>
               <input
@@ -64,16 +65,16 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-[#0A0A0A] border border-bb-gray-mid rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none focus:border-bb-gold transition-colors"
+                className="w-full bg-white border border-admin-border rounded-lg py-3 pl-10 pr-4 text-admin-text focus:outline-none focus:border-admin-primary-500 focus:ring-1 focus:ring-admin-primary-500 transition-shadow"
                 placeholder="admin@blackbazaar.com"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-bb-white">Mot de passe</label>
+            <label className="text-sm font-medium text-admin-text">Mot de passe</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-bb-text-muted">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-admin-text-muted">
                 <Lock size={18} />
               </div>
               <input
@@ -81,7 +82,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-[#0A0A0A] border border-bb-gray-mid rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none focus:border-bb-gold transition-colors"
+                className="w-full bg-white border border-admin-border rounded-lg py-3 pl-10 pr-4 text-admin-text focus:outline-none focus:border-admin-primary-500 focus:ring-1 focus:ring-admin-primary-500 transition-shadow"
                 placeholder="••••••••"
               />
             </div>
@@ -90,7 +91,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-[#C9A84C] to-[#E8C97A] text-[#0A0A0A] font-bold uppercase tracking-wide py-3.5 rounded-lg flex justify-center items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full bg-admin-primary-500 hover:bg-admin-primary-600 text-white font-bold rounded-lg px-4 py-3 transition duration-300 flex justify-center items-center gap-2 disabled:opacity-50 shadow-sm"
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : "Se connecter"}
           </button>

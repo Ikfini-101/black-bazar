@@ -37,7 +37,6 @@ export default function OrderDetail({ params }: { params: Promise<{ id: string }
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
-      // reload
       const res = await fetch(`/api/admin/orders/${id}`);
       setOrder(await res.json());
     } catch (err) {
@@ -47,26 +46,26 @@ export default function OrderDetail({ params }: { params: Promise<{ id: string }
     }
   }
 
-  if (loading) return <div className="flex justify-center p-12"><Loader2 className="animate-spin text-bb-gold" size={32} /></div>;
-  if (!order) return <div className="text-center p-12 text-bb-rare">Commande introuvable.</div>;
+  if (loading) return <div className="flex justify-center p-12"><Loader2 className="animate-spin text-admin-primary-500" size={32} /></div>;
+  if (!order) return <div className="text-center p-12 text-red-500">Commande introuvable.</div>;
 
   const currentStatusConf = ORDER_STATUS_CONFIG[order.status as keyof typeof ORDER_STATUS_CONFIG];
 
   return (
     <div className="space-y-6 pb-12">
-      <Link href="/admin/commandes" className="text-bb-text-muted hover:text-bb-gold flex items-center gap-2 text-sm w-fit">
+      <Link href="/admin/commandes" className="text-admin-text-muted hover:text-admin-primary-500 flex items-center gap-2 text-sm w-fit font-medium">
         <ArrowLeft size={16} />
         Retour aux commandes
       </Link>
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-bb-gray-mid pb-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-admin-border pb-4">
         <div>
-          <h1 className="font-display text-2xl font-bold">Commande</h1>
-          <p className="text-sm text-bb-text-muted font-mono mt-1">{order.id}</p>
+          <h1 className="text-2xl font-bold">Commande</h1>
+          <p className="text-sm text-admin-text-muted font-mono mt-1">{order.id}</p>
         </div>
         <div 
-          className="text-sm px-3 py-1 rounded-full border bg-opacity-10 font-medium w-fit"
-          style={{ color: currentStatusConf.color, borderColor: `${currentStatusConf.color}40`, backgroundColor: `${currentStatusConf.color}20` }}
+          className="text-sm px-3 py-1 rounded-full border bg-white font-bold w-fit shadow-sm"
+          style={{ color: currentStatusConf.color, borderColor: `${currentStatusConf.color}40` }}
         >
           {currentStatusConf.label}
         </div>
@@ -74,20 +73,20 @@ export default function OrderDetail({ params }: { params: Promise<{ id: string }
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Update Status */}
-        <div className="bg-bb-gray border border-bb-gray-mid rounded-xl p-5 space-y-4">
-          <h2 className="font-display text-xl text-bb-gold">Mettre à jour le statut</h2>
+        <div className="bg-admin-surface border border-admin-border rounded-2xl p-5 space-y-4 shadow-sm">
+          <h2 className="text-lg font-bold text-admin-primary-600">Mettre à jour le statut</h2>
           <div className="flex gap-3">
             <select
               value={status}
               onChange={e => setStatus(e.target.value)}
-              className="flex-1 bg-[#0A0A0A] border border-bb-gray-mid rounded-lg p-3 focus:outline-none focus:border-bb-gold"
+              className="flex-1 bg-white border border-admin-border rounded-lg p-3 focus:outline-none focus:border-admin-primary-500 focus:ring-1 focus:ring-admin-primary-500"
             >
               {ORDER_STATUSES.map(s => <option key={s} value={s}>{ORDER_STATUS_CONFIG[s].label}</option>)}
             </select>
             <button
               onClick={updateStatus}
               disabled={saving || status === order.status}
-              className="bg-bb-gold text-bb-black px-4 rounded-lg font-medium hover:bg-bb-gold-light disabled:opacity-50 flex items-center gap-2"
+              className="bg-admin-primary-500 text-white hover:bg-admin-primary-600 transition duration-300 px-4 rounded-lg font-bold disabled:opacity-50 flex items-center gap-2"
             >
               {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
               <span className="hidden md:inline">Enregistrer</span>
@@ -96,14 +95,14 @@ export default function OrderDetail({ params }: { params: Promise<{ id: string }
         </div>
 
         {/* Customer Info */}
-        <div className="bg-bb-gray border border-bb-gray-mid rounded-xl p-5 space-y-4">
-          <h2 className="font-display text-xl text-bb-gold">Client & Livraison</h2>
-          <div className="text-sm space-y-2">
-            <p><span className="text-bb-text-muted">Email :</span> {order.customerEmail}</p>
-            {order.customerName && <p><span className="text-bb-text-muted">Nom :</span> {order.customerName}</p>}
+        <div className="bg-admin-surface border border-admin-border rounded-2xl p-5 space-y-4 shadow-sm">
+          <h2 className="text-lg font-bold text-admin-primary-600">Client & Livraison</h2>
+          <div className="text-sm space-y-2 font-medium">
+            <p><span className="text-admin-text-muted">Email :</span> {order.customerEmail}</p>
+            {order.customerName && <p><span className="text-admin-text-muted">Nom :</span> {order.customerName}</p>}
             
-            <div className="flex gap-2 mt-4 pt-4 border-t border-bb-gray-mid">
-              <MapPin size={18} className="text-bb-text-muted shrink-0 mt-0.5" />
+            <div className="flex gap-2 mt-4 pt-4 border-t border-admin-border">
+              <MapPin size={18} className="text-admin-accent-500 shrink-0 mt-0.5" />
               <div>
                 <p>{order.shippingAddress?.street}</p>
                 <p>{order.shippingAddress?.postalCode} {order.shippingAddress?.city}</p>
@@ -115,30 +114,32 @@ export default function OrderDetail({ params }: { params: Promise<{ id: string }
       </div>
 
       {/* Items */}
-      <div className="bg-bb-gray border border-bb-gray-mid rounded-xl p-5">
-        <h2 className="font-display text-xl text-bb-gold mb-4">Articles ({order.items.length})</h2>
-        <div className="divide-y divide-bb-gray-mid">
+      <div className="bg-admin-surface border border-admin-border rounded-2xl p-5 shadow-sm">
+        <h2 className="text-lg font-bold text-admin-primary-600 mb-4">Articles ({order.items.length})</h2>
+        <div className="divide-y divide-admin-border">
           {order.items.map((item: any, i: number) => (
             <div key={i} className="py-3 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                {item.image && (
+                {item.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.image} alt="" className="w-12 h-12 rounded object-cover border border-bb-gray-mid" />
+                  <img src={item.image} alt="" className="w-12 h-12 rounded object-cover border border-admin-border" />
+                ) : (
+                  <div className="w-12 h-12 rounded border border-admin-border bg-neutral-100 flex items-center justify-center text-xs text-admin-text-muted">Img</div>
                 )}
                 <div>
-                  <p className="font-medium">{item.name}</p>
-                  <p className="text-sm text-bb-text-muted">Qté: {item.quantity}</p>
+                  <p className="font-bold text-admin-text">{item.name}</p>
+                  <p className="text-sm text-admin-text-muted font-medium">Qté: {item.quantity}</p>
                 </div>
               </div>
-              <div className="font-medium">
+              <div className="font-bold">
                 {(item.price * item.quantity).toFixed(2)}{CURRENCY_SYMBOL}
               </div>
             </div>
           ))}
         </div>
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-bb-gray-mid">
-          <span className="text-lg font-medium">Total payé</span>
-          <span className="text-2xl font-bold text-bb-gold">{order.total.toFixed(2)}{CURRENCY_SYMBOL}</span>
+        <div className="flex justify-between items-center mt-4 pt-4 border-t border-admin-border">
+          <span className="text-lg font-bold">Total payé</span>
+          <span className="text-2xl font-black text-admin-primary-600">{order.total.toFixed(2)}{CURRENCY_SYMBOL}</span>
         </div>
       </div>
     </div>

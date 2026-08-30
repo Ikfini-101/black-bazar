@@ -2,7 +2,7 @@ import { Header, Footer } from "@/components/storefront/Layout";
 import ProductCard from "@/components/storefront/ProductCard";
 import { getDb } from "@/lib/db";
 import { products } from "@/lib/db/schema";
-import { and, eq, sql, desc, asc } from "drizzle-orm";
+import { and, eq, desc, asc } from "drizzle-orm";
 import { CATEGORIES, COUNTRIES } from "@/lib/constants";
 import Link from "next/link";
 import { Search } from "lucide-react";
@@ -41,15 +41,15 @@ export default async function CataloguePage({
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row gap-8">
         {/* Filters Sidebar */}
-        <aside className="w-full md:w-64 shrink-0 space-y-6">
-          <div>
-            <h2 className="font-display text-xl font-bold mb-4 text-bb-gold border-b border-bb-gray-mid pb-2">Catégories</h2>
-            <div className="space-y-2">
+        <aside className="w-full md:w-64 shrink-0 space-y-8">
+          <div className="glass-sm p-6 rounded-2xl border border-white/60 shadow-md">
+            <h2 className="text-lg font-black mb-4 text-gray-800 border-b border-white/60 pb-3">Catégories</h2>
+            <div className="space-y-3">
               <Link 
                 href="/catalogue" 
-                className={`block text-sm ${!category ? 'text-bb-gold font-bold' : 'text-bb-text-muted hover:text-bb-white'}`}
+                className={`block text-sm font-medium transition-colors ${!category ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
               >
                 Toutes les catégories
               </Link>
@@ -57,7 +57,7 @@ export default async function CataloguePage({
                 <Link 
                   key={c}
                   href={`/catalogue?category=${encodeURIComponent(c)}${country ? `&country=${encodeURIComponent(country)}` : ''}`}
-                  className={`block text-sm ${category === c ? 'text-bb-gold font-bold' : 'text-bb-text-muted hover:text-bb-white'}`}
+                  className={`block text-sm font-medium transition-colors ${category === c ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
                 >
                   {c}
                 </Link>
@@ -65,12 +65,12 @@ export default async function CataloguePage({
             </div>
           </div>
 
-          <div>
-            <h2 className="font-display text-xl font-bold mb-4 text-bb-gold border-b border-bb-gray-mid pb-2">Origine</h2>
-            <div className="space-y-2">
+          <div className="glass-sm p-6 rounded-2xl border border-white/60 shadow-md">
+            <h2 className="text-lg font-black mb-4 text-gray-800 border-b border-white/60 pb-3">Origine</h2>
+            <div className="space-y-3">
               <Link 
                 href={`/catalogue${category ? `?category=${encodeURIComponent(category)}` : ''}`} 
-                className={`block text-sm ${!country ? 'text-bb-gold font-bold' : 'text-bb-text-muted hover:text-bb-white'}`}
+                className={`block text-sm font-medium transition-colors ${!country ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
               >
                 Tous les pays
               </Link>
@@ -78,7 +78,7 @@ export default async function CataloguePage({
                 <Link 
                   key={c.name}
                   href={`/catalogue?country=${encodeURIComponent(c.name)}${category ? `&category=${encodeURIComponent(category)}` : ''}`}
-                  className={`block text-sm ${country === c.name ? 'text-bb-gold font-bold' : 'text-bb-text-muted hover:text-bb-white'}`}
+                  className={`block text-sm font-medium transition-colors ${country === c.name ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
                 >
                   {c.flag} {c.name}
                 </Link>
@@ -89,19 +89,19 @@ export default async function CataloguePage({
 
         {/* Product Grid */}
         <div className="flex-1">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="font-display text-2xl md:text-3xl font-bold">
+          <div className="flex justify-between items-center mb-8 admin-glass-panel py-4 px-6 rounded-2xl">
+            <h1 className="text-3xl font-black text-gray-800">
               {category ? category : "Tous les produits"} 
-              <span className="text-bb-text-muted text-lg ml-2 font-sans font-normal">({items.length})</span>
+              <span className="text-gray-500 text-xl ml-3 font-medium">({items.length})</span>
             </h1>
           </div>
 
           {items.length === 0 ? (
-            <div className="text-center py-20 bg-bb-gray border border-bb-gray-mid rounded-xl">
-              <Search size={48} className="mx-auto text-bb-text-muted mb-4" />
-              <p className="text-lg text-bb-white mb-2">Aucun produit trouvé</p>
-              <p className="text-bb-text-muted">Essayez de modifier vos filtres.</p>
-              <Link href="/catalogue" className="inline-block mt-4 text-bb-gold hover:underline">
+            <div className="text-center py-20 glass-sm border border-white/60 rounded-2xl shadow-md">
+              <Search size={48} className="mx-auto text-gray-500 mb-4" />
+              <p className="text-xl font-bold text-gray-800 mb-2">Aucun produit trouvé</p>
+              <p className="text-gray-500 font-medium">Essayez de modifier vos filtres.</p>
+              <Link href="/catalogue" className="inline-block mt-6 px-6 py-2 glass-gold text-bb-gold font-bold rounded-lg hover:glass-gold transition-colors">
                 Réinitialiser les filtres
               </Link>
             </div>

@@ -1,65 +1,52 @@
-"use client";
-
-import { useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import { Header, Footer } from "@/components/storefront/Layout";
-import { useCart } from "@/lib/cart";
-import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { CheckCircle2, Package, ArrowRight } from "lucide-react";
 
-function ConfirmationContent() {
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get("order");
-  const { clearCart } = useCart();
+export default async function OrderConfirmationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const resolvedParams = await searchParams;
+  const orderId = resolvedParams.id as string;
 
-  useEffect(() => {
-    if (orderId) {
-      clearCart();
-    }
-  }, [orderId, clearCart]);
-
-  return (
-    <div className="flex-1 flex items-center justify-center py-20 px-4">
-      <div className="max-w-md w-full bg-bb-gray border border-bb-gray-mid rounded-2xl p-8 text-center space-y-6 shadow-2xl">
-        <div className="w-20 h-20 bg-bb-stock-bg text-bb-stock rounded-full flex items-center justify-center mx-auto mb-2">
-          <CheckCircle2 size={48} />
-        </div>
-        
-        <h1 className="font-display text-3xl font-bold">Commande confirmée !</h1>
-        
-        <div className="space-y-2 text-bb-white/80">
-          <p>Merci pour votre achat sur Black Bazaar.</p>
-          <p>Un email de confirmation vous sera envoyé prochainement avec les détails de livraison.</p>
-        </div>
-
-        {orderId && (
-          <div className="bg-[#0A0A0A] p-3 rounded-lg border border-bb-gray-mid">
-            <p className="text-xs text-bb-text-muted uppercase tracking-wider mb-1">N° de commande</p>
-            <p className="font-mono text-bb-gold">{orderId}</p>
-          </div>
-        )}
-
-        <div className="pt-4 border-t border-bb-gray-mid">
-          <Link 
-            href="/catalogue"
-            className="w-full bg-bb-white text-bb-black font-bold uppercase tracking-wide py-3 rounded-xl flex justify-center items-center gap-2 hover:bg-bb-gold transition-colors"
-          >
-            Continuer mes achats
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function ConfirmationPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <Suspense fallback={<div className="flex-1 flex items-center justify-center">Chargement...</div>}>
-        <ConfirmationContent />
-      </Suspense>
+      
+      <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-20 flex flex-col items-center justify-center">
+        <div className="admin-glass-panel text-center w-full relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-2 glass-gold"></div>
+          
+          <div className="w-20 h-20 glass-gold rounded-full flex items-center justify-center mx-auto mb-6 shadow-md border border-bb-gold">
+            <CheckCircle2 size={40} className="text-bb-gold" />
+          </div>
+          
+          <h1 className="text-3xl md:text-4xl font-black mb-4 text-gray-800 tracking-tight">Commande confirmée !</h1>
+          
+          <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto font-medium leading-relaxed">
+            Merci pour votre confiance. Votre commande est en cours de préparation et sera expédiée très prochainement.
+          </p>
+
+          <div className="bg-transparent border border-white/60 rounded-xl p-6 mb-8 max-w-sm mx-auto shadow-inner text-left">
+            <div className="flex items-center gap-3 mb-2 text-gray-500 font-bold text-sm uppercase tracking-wider">
+              <Package size={18} className="text-admin-accent-500" />
+              Numéro de suivi
+            </div>
+            <p className="font-mono font-medium text-gray-800 break-all glass-sm p-3 rounded-lg border border-white/60 text-center text-sm">
+              {orderId || "BB-XXXXXXXX"}
+            </p>
+          </div>
+
+          <Link 
+            href="/catalogue"
+            className="inline-flex items-center gap-2 glass-gold text-gray-800 font-bold py-4 px-8 rounded-xl hover:glass-gold transition-all shadow-lg shadow-bb-gold/30 hover:-translate-y-1"
+          >
+            Continuer vos achats <ArrowRight size={20} />
+          </Link>
+        </div>
+      </main>
+
       <Footer />
     </div>
   );
