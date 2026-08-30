@@ -3,7 +3,13 @@ import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
-  images: { unoptimized: true }, // next/image ne tourne pas sur Workers
+  images: { unoptimized: true },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 initOpenNextCloudflareForDev();

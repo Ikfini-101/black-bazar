@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
-  const { cart, removeItem, updateQuantity, clearCart } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -22,7 +22,7 @@ export default function CartPage() {
     country: "France"
   });
 
-  const total = cart.reduce((acc, item) => acc + item.priceMin * item.quantity, 0);
+  const total = cart.reduce((acc, item) => acc + (item.priceMin || item.price) * item.quantity, 0);
 
   async function handleCheckout(e: React.FormEvent) {
     e.preventDefault();
