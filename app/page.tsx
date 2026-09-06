@@ -46,8 +46,8 @@ export default async function Home() {
 
           <div className="relative z-10 glass-lg text-center max-w-4xl mx-auto p-10 md:p-16 space-y-8">
             <h1 className="text-5xl md:text-7xl font-black text-gray-800 tracking-tight leading-tight">
-              Tous vos commandes <br />
-              <span className="text-bb-gold">livrées chez vous.</span>
+              Rare au pays <br />
+              <span className="text-bb-gold">disponible ici.</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
               Découvrez notre sélection de produits africains rares et authentiques. De nos producteurs directement à votre porte.

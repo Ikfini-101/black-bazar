@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata = {
-  title: "Black Bazaar — L'Afrique chez vous",
+  title: "Black Bazaar — Rare au pays, disponible ici",
   description: "Découvrez des produits africains rares et authentiques, livrés en France.",
 };
 
