@@ -11,9 +11,10 @@
     "database_id": "42e0094a-3296-4ff3-9dc3-75ce04aca633",
     "migrations_dir": "drizzle"
   }],
-  "r2_buckets": [{
-    "binding": "PRODUCT_IMAGES",
-    "bucket_name": "blackbazaar-images"
-  }],
+  // R2 bucket - à activer après création du bucket et ajout de la permission Workers R2 Storage dans le token CF
+  // "r2_buckets": [{
+  //   "binding": "PRODUCT_IMAGES",
+  //   "bucket_name": "blackbazaar-images"
+  // }],
   "observability": { "enabled": true }
 }
