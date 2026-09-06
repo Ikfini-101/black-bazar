@@ -71,7 +71,7 @@ export function Footer() {
           <Link href="/">
             <Image src="/logo-transparent.png" alt="Black Bazaar" width={160} height={48} className="h-12 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300" />
           </Link>
-          <p className="text-sm text-gray-500 mt-2 font-medium">L&apos;Afrique chez vous.</p>
+          <p className="text-sm text-gray-500 mt-2 font-medium">Rare au pays disponible ici.</p>
         </div>
         <p className="text-sm text-gray-500 font-medium">© 2026 Black Bazaar. Tous droits réservés.</p>
       </div>
