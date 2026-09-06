@@ -45,11 +45,11 @@ export default async function CataloguePage({
         {/* Filters Sidebar */}
         <aside className="w-full md:w-64 shrink-0 space-y-8">
           <div className="glass-sm p-6 rounded-2xl border border-white/60 shadow-md">
-            <h2 className="text-lg font-black mb-4 text-gray-800 border-b border-white/60 pb-3">Catégories</h2>
+            <h2 className="text-lg font-black mb-4 text-gray-900 border-b border-gray-300 pb-3">Catégories</h2>
             <div className="space-y-3">
               <Link 
                 href="/catalogue" 
-                className={`block text-sm font-medium transition-colors ${!category ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
+                className={`block text-sm transition-colors px-3 py-2 rounded-lg ${!category ? 'glass-gold text-gray-900 font-black shadow-md' : 'text-gray-900 font-bold hover:bg-white/60'}`}
               >
                 Toutes les catégories
               </Link>
@@ -57,7 +57,7 @@ export default async function CataloguePage({
                 <Link 
                   key={c}
                   href={`/catalogue?category=${encodeURIComponent(c)}${country ? `&country=${encodeURIComponent(country)}` : ''}`}
-                  className={`block text-sm font-medium transition-colors ${category === c ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
+                  className={`block text-sm transition-colors px-3 py-2 rounded-lg ${category === c ? 'glass-gold text-gray-900 font-black shadow-md' : 'text-gray-900 font-bold hover:bg-white/60'}`}
                 >
                   {c}
                 </Link>
@@ -66,11 +66,11 @@ export default async function CataloguePage({
           </div>
 
           <div className="glass-sm p-6 rounded-2xl border border-white/60 shadow-md">
-            <h2 className="text-lg font-black mb-4 text-gray-800 border-b border-white/60 pb-3">Origine</h2>
+            <h2 className="text-lg font-black mb-4 text-gray-900 border-b border-gray-300 pb-3">Origine</h2>
             <div className="space-y-3">
               <Link 
                 href={`/catalogue${category ? `?category=${encodeURIComponent(category)}` : ''}`} 
-                className={`block text-sm font-medium transition-colors ${!country ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
+                className={`block text-sm transition-colors px-3 py-2 rounded-lg ${!country ? 'glass-gold text-gray-900 font-black shadow-md' : 'text-gray-900 font-bold hover:bg-white/60'}`}
               >
                 Tous les pays
               </Link>
@@ -78,7 +78,7 @@ export default async function CataloguePage({
                 <Link 
                   key={c.name}
                   href={`/catalogue?country=${encodeURIComponent(c.name)}${category ? `&category=${encodeURIComponent(category)}` : ''}`}
-                  className={`block text-sm font-medium transition-colors ${country === c.name ? 'text-bb-gold font-bold' : 'text-gray-500 hover:text-bb-gold'}`}
+                  className={`block text-sm transition-colors px-3 py-2 rounded-lg ${country === c.name ? 'glass-gold text-gray-900 font-black shadow-md' : 'text-gray-900 font-bold hover:bg-white/60'}`}
                 >
                   {c.flag} {c.name}
                 </Link>

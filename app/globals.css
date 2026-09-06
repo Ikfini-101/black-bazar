@@ -43,43 +43,43 @@ body {
 
 /* Verre ultra-léger — survols, badges */
 .glass-xs {
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(6px) saturate(160%);
-  -webkit-backdrop-filter: blur(6px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.80);
   border-radius: 0.75rem;
 }
 
 /* Verre léger — cards produit, filtres */
 .glass-sm {
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.70);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.90);
   border-radius: 1.25rem;
   box-shadow:
     0 4px 24px rgba(0,0,0,0.05),
-    inset 0 1px 0 rgba(255,255,255,0.8);
+    inset 0 1px 0 rgba(255,255,255,1);
 }
 
 /* Verre moyen — header, footer, sections */
 .glass-md {
-  background: rgba(255,255,255,0.65);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  border: 1px solid rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.95);
   border-radius: 1.5rem;
   box-shadow:
     0 8px 32px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+    inset 0 1px 0 rgba(255,255,255,1);
 }
 
 /* Verre fort — hero, modals, panels majeurs */
 .glass-lg {
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(32px) saturate(220%);
   -webkit-backdrop-filter: blur(32px) saturate(220%);
-  border: 1px solid rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,1);
   border-radius: 2rem;
   box-shadow:
     0 16px 48px rgba(0,0,0,0.08),
